@@ -1,15 +1,4 @@
-// Iremos pegar os dados de API da OpenWeather openweathermap.org
-// Entender como o html funciona
-// prevenir do formulario ser enviado, se nao a página atualiza
-// requisicao interna , criar uma funcao de aviso
-
-// ao colocar async irei usar code nao ordenado
-
-// Montar requisicao ao site OpenWeather, ira devolver JSON com informações da cidade. Ter o cadastro no site.
-// Verificar documentação das inf meteorológicas do lugar na API call.
-// encode para corrigir o processo de string e pegar a hash da API key para poder consultar.
-
-document.querySelector('.busca').addEventListener('submit',async (event)=> {
+document.querySelector('.busca').addEventListener('submit', async (event) => {
     event.preventDefault();
 
     let input = document.querySelector('#searchInput').value;
@@ -19,8 +8,8 @@ document.querySelector('.busca').addEventListener('submit',async (event)=> {
         showWarning('Carregando...');
 
         let results = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=
-        ${encodeURI(input)}&units=metric&lang=pt_br&appid=d06cdb298fafc83c520d5ab677fc477e`); //faz a req e espera o resultado, onde sera armazenado
-        let json = await results.json(); // pega o resultado e transforma em json para guardar
+        ${encodeURI(input)}&units=metric&lang=pt_br&appid=d06cdb298fafc83c520d5ab677fc477e`);
+        let json = await results.json();
 
         if(json.cod === 200) {
             showInfo({
@@ -39,7 +28,6 @@ document.querySelector('.busca').addEventListener('submit',async (event)=> {
         clearInfo();
     }
 });
-
 
 function showInfo(obj) {
     showWarning('');
@@ -65,4 +53,3 @@ function clearInfo() {
 function showWarning(msg) {
     document.querySelector('.aviso').innerHTML = msg;
 }
-
